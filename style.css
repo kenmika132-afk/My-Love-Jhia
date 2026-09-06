@@ -1,0 +1,1517 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+
+/* ================= RESET ================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+
+  min-height: 100vh;
+
+  background-image:
+    url("ChatGPT_Image_Sep_1__2026__10_01_28_PM.png");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  font-family: "Poppins", sans-serif;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+}
+
+
+
+/* ================= MAIN CARD ================= */
+
+.love-card {
+
+  width: 100%;
+
+  max-width: 1200px;
+
+  height: 90vh;
+
+  display: flex;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    0 25px 60px rgba(0, 20, 80, 0.35);
+
+  backdrop-filter: blur(12px);
+
+  opacity: 0;
+
+  transform: scale(0.94);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+
+}
+
+
+.love-card.revealed {
+
+  opacity: 1;
+
+  transform: scale(1);
+
+}
+
+
+
+/* ================= ENVELOPE INTRO ================= */
+
+.intro-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 200;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 15, 45, 0.55),
+      rgba(5, 15, 45, 0.75)
+    );
+
+  backdrop-filter:
+    blur(3px);
+
+  transition:
+    opacity 0.9s ease;
+
+}
+
+
+.intro-overlay.fade-out {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+}
+
+
+.intro-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 25px;
+
+  text-align: center;
+
+  padding: 20px;
+
+}
+
+
+.intro-greeting {
+
+  margin: 0;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 54px;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 4px 20px rgba(0, 20, 80, 0.5);
+
+}
+
+
+.intro-greeting span {
+
+  color: #cfe4ff;
+
+}
+
+
+.intro-hint {
+
+  margin: 0;
+
+  color: #dce9ff;
+
+  font-size: 14px;
+
+  letter-spacing: 0.5px;
+
+  animation:
+    hintPulse 1.8s ease-in-out infinite;
+
+}
+
+
+@keyframes hintPulse {
+
+  0%, 100% {
+
+    opacity: 0.6;
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+  }
+
+}
+
+
+.envelope-wrap {
+
+  cursor: pointer;
+
+  perspective: 1000px;
+
+}
+
+
+.envelope-3d {
+
+  position: relative;
+
+  width: 220px;
+
+  height: 150px;
+
+  transition:
+    transform 0.3s ease;
+
+}
+
+
+.envelope-wrap:hover .envelope-3d {
+
+  transform:
+    translateY(-4px)
+    scale(1.03);
+
+}
+
+
+.env-back {
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      160deg,
+      #eaf3ff,
+      #cfe3ff
+    );
+
+  box-shadow:
+    0 20px 45px
+    rgba(5, 20, 60, 0.35);
+
+}
+
+
+.env-letter {
+
+  position: absolute;
+
+  left: 12px;
+
+  right: 12px;
+
+  top: 12px;
+
+  height: 118px;
+
+  border-radius: 8px;
+
+  background: #fdfefe;
+
+  box-shadow:
+    0 6px 15px
+    rgba(0, 20, 60, 0.15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 20px;
+
+  color: #2b5aa3;
+
+  opacity: 0;
+
+  transform:
+    translateY(0);
+
+  transition:
+    transform 1s ease 0.15s,
+    opacity 0.2s ease 0.35s;
+
+  z-index: 1;
+}
+
+
+.env-front {
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  height: 85px;
+
+  background:
+    linear-gradient(
+      160deg,
+      #dcebff,
+      #a9caff
+    );
+
+  clip-path:
+    polygon(0 100%, 50% 40%, 100% 100%);
+
+  border-radius:
+    0 0 10px 10px;
+
+  z-index: 2;
+}
+
+
+.env-flap {
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  top: 0;
+
+  height: 90px;
+
+  background:
+    linear-gradient(
+      200deg,
+      #f4f9ff,
+      #bcd7ff
+    );
+
+  clip-path:
+    polygon(0 0, 100% 0, 50% 78%);
+
+  transform-origin: top center;
+
+  transition:
+    transform 0.7s ease;
+
+  z-index: 3;
+
+  border-radius: 10px 10px 0 0;
+
+}
+
+
+.env-heart {
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 58px;
+
+  transform:
+    translate(-50%, 0);
+
+  font-size: 26px;
+
+  z-index: 4;
+
+  filter:
+    drop-shadow(
+      0 4px 8px rgba(0, 20, 60, 0.25)
+    );
+
+  transition:
+    opacity 0.3s ease;
+
+}
+
+
+/* ============ OPENED STATE ============ */
+
+.envelope-wrap.opened {
+
+  pointer-events: none;
+
+}
+
+
+.envelope-wrap.opened .env-flap {
+
+  transform:
+    rotateX(180deg);
+
+}
+
+
+.envelope-wrap.opened .env-heart {
+
+  opacity: 0;
+
+}
+
+
+.envelope-wrap.opened .env-letter {
+
+  opacity: 1;
+
+  transform:
+    translateY(-95px);
+
+}
+
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+
+  width: 280px;
+
+  min-width: 280px;
+
+  padding: 40px 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background:
+    rgba(220, 235, 255, 0.88);
+
+  border-right:
+    1px solid rgba(255, 255, 255, 0.5);
+
+}
+
+
+
+/* ================= SIDEBAR TITLE ================= */
+
+.sidebar h1 {
+
+  margin: 0 0 40px;
+
+  text-align: center;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 42px;
+
+  color: #123b82;
+
+}
+
+
+.sidebar h1 span {
+
+  font-size: 35px;
+
+}
+
+
+
+/* ================= NAV ================= */
+
+nav {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+}
+
+
+.nav-btn {
+
+  width: 100%;
+
+  padding: 15px 18px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: transparent;
+
+  color: #183f7d;
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 15px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+}
+
+
+.nav-btn span {
+
+  display: inline-block;
+
+  width: 32px;
+
+  font-size: 23px;
+
+}
+
+
+.nav-btn:hover {
+
+  background:
+    rgba(100, 160, 240, 0.18);
+
+  transform:
+    translateX(3px);
+
+}
+
+
+.nav-btn.active {
+
+  background:
+    rgba(100, 160, 240, 0.30);
+
+  box-shadow:
+    inset 4px 0 #2474df;
+
+}
+
+
+
+/* ================= SIDEBAR BOTTOM ================= */
+
+.sidebar-bottom {
+
+  margin-top: auto;
+
+  text-align: center;
+
+  color: #31558c;
+
+}
+
+
+.envelope {
+
+  position: relative;
+
+  font-size: 60px;
+
+  margin-bottom: 10px;
+
+}
+
+
+.tiny-hearts {
+
+  position: absolute;
+
+  top: -10px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  font-size: 16px;
+
+  color: #4b91e8;
+
+  letter-spacing: 4px;
+
+}
+
+
+.sidebar-bottom p {
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+}
+
+
+.bottom-heart {
+
+  margin-top: 12px;
+
+  font-size: 22px;
+
+  color: #2777dc;
+
+}
+
+
+
+/* ================= CONTENT ================= */
+
+.content {
+
+  flex: 1;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, 0.70);
+
+}
+
+
+
+/* ================= PAGE ================= */
+
+.page {
+
+  display: none;
+
+  width: 100%;
+
+  height: 100%;
+
+  padding: 70px 80px;
+
+  position: relative;
+
+  overflow-y: auto;
+
+  animation:
+    fadeIn 0.4s ease;
+
+}
+
+
+.page.active-page {
+
+  display: block;
+
+}
+
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+
+/* ================= TOP MUSIC BUTTON ================= */
+
+.music-button {
+
+  position: absolute;
+
+  top: 30px;
+
+  right: 35px;
+
+  padding: 12px 20px;
+
+  border-radius: 30px;
+
+  color: #1761bd;
+
+  background:
+    rgba(220, 235, 255, 0.7);
+
+  border:
+    1px solid #a9caff;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+}
+
+
+.music-button:hover {
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(50, 120, 220, 0.2);
+
+}
+
+
+
+/* ================= TITLES ================= */
+
+.page h2 {
+
+  margin-top: 30px;
+
+  font-family:
+    "Caveat", cursive;
+
+  font-size: 60px;
+
+  color: #123b82;
+
+}
+
+
+.page h2 span {
+
+  color: #4388e8;
+
+}
+
+
+
+/* ================= DIVIDER ================= */
+
+.divider {
+
+  width: 400px;
+
+  max-width: 80%;
+
+  border-bottom:
+    2px solid #c5dcfa;
+
+  margin:
+    15px 0 35px;
+
+  text-align: center;
+
+}
+
+
+.divider span {
+
+  position: relative;
+
+  top: 13px;
+
+  padding: 0 15px;
+
+  color: #347fe1;
+
+  background:
+    rgba(255, 255, 255, 0.7);
+
+}
+
+
+
+/* ================= LETTER ================= */
+
+.letter-text {
+
+  max-width: 600px;
+
+  color: #203f70;
+
+  font-size: 16px;
+
+  line-height: 2;
+
+}
+
+
+.letter-text p {
+
+  margin-bottom: 22px;
+
+}
+
+
+.signature {
+
+  color: #286ed0;
+
+  font-family:
+    "Caveat", cursive;
+
+  font-size: 28px;
+
+}
+
+
+
+/* ================= FLOWER ================= */
+
+.flower {
+
+  position: absolute;
+
+  right: 90px;
+
+  bottom: 120px;
+
+  font-size: 150px;
+
+  filter:
+    drop-shadow(
+      0 10px 10px
+      rgba(20, 60, 130, 0.15)
+    );
+
+  transform:
+    rotate(-10deg);
+
+}
+
+
+
+/* ================= SURPRISE BUTTON ================= */
+
+.surprise-btn {
+
+  position: absolute;
+
+  bottom: 35px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  padding:
+    16px 35px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  background:
+    #2775df;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(39, 117, 223, 0.35);
+
+  transition: 0.25s;
+
+}
+
+
+.surprise-btn:hover {
+
+  transform:
+    translateX(-50%)
+    translateY(-3px);
+
+  box-shadow:
+    0 15px 30px
+    rgba(39, 117, 223, 0.45);
+
+}
+
+
+
+/* ================= SONGS ================= */
+
+.songs-container {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(250px, 1fr));
+
+  gap: 20px;
+
+  max-width: 850px;
+
+}
+
+
+.song-card {
+
+  padding: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  border-radius: 22px;
+
+  background:
+    rgba(220, 235, 255, 0.7);
+
+  border:
+    1px solid #c4dcfa;
+
+  box-shadow:
+    0 8px 20px
+    rgba(30, 90, 170, 0.08);
+
+  transition: 0.25s;
+
+}
+
+
+.song-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 12px 25px
+    rgba(30, 90, 170, 0.15);
+
+}
+
+
+.album-heart {
+
+  width: 65px;
+
+  height: 65px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #dcecff,
+      #8ebcff
+    );
+
+  font-size: 35px;
+
+}
+
+
+.song-info {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+
+.song-info h3 {
+
+  margin:
+    0 0 5px;
+
+  color: #174a91;
+
+  font-size: 16px;
+
+}
+
+
+.song-info p {
+
+  margin: 0;
+
+  color: #52709e;
+
+  font-size: 13px;
+
+}
+
+
+.play-btn {
+
+  padding:
+    10px 18px;
+
+  border: none;
+
+  border-radius: 25px;
+
+  background:
+    #2775df;
+
+  color: white;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: 0.25s;
+
+}
+
+
+.play-btn:hover {
+
+  background:
+    #1761bd;
+
+  transform:
+    scale(1.05);
+
+}
+
+
+
+/* ================= REASONS ================= */
+
+.reasons {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 220px);
+
+  gap: 20px;
+
+}
+
+
+.reason {
+
+  padding: 25px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(220, 235, 255, 0.7);
+
+  text-align: center;
+
+  transition: 0.25s;
+
+}
+
+
+.reason:hover {
+
+  transform:
+    translateY(-4px);
+
+}
+
+
+.reason span {
+
+  font-size: 35px;
+
+}
+
+
+.reason p {
+
+  color: #31558c;
+
+}
+
+
+
+/* ================= SURPRISE OVERLAY ================= */
+
+.surprise-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    rgba(5, 30, 80, 0.55);
+
+  backdrop-filter:
+    blur(8px);
+
+  z-index: 100;
+
+}
+
+
+.surprise-overlay.show {
+
+  display: flex;
+
+}
+
+
+.surprise-box {
+
+  width: 90%;
+
+  max-width: 450px;
+
+  padding: 45px;
+
+  text-align: center;
+
+  border-radius: 30px;
+
+  background:
+    #edf5ff;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 20, 80, 0.4);
+
+  animation:
+    pop 0.4s ease;
+
+}
+
+
+@keyframes pop {
+
+  from {
+
+    transform:
+      scale(0.7);
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    transform:
+      scale(1);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+.big-heart {
+
+  font-size: 80px;
+
+}
+
+
+.surprise-box h2 {
+
+  color: #174a91;
+
+}
+
+
+.surprise-box p {
+
+  color: #52709e;
+
+  line-height: 1.8;
+
+}
+
+
+.surprise-box button {
+
+  padding:
+    12px 25px;
+
+  border: none;
+
+  border-radius: 25px;
+
+  background:
+    #2775df;
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media (max-width: 800px) {
+
+
+  body {
+
+    padding: 8px;
+
+  }
+
+
+  .love-card {
+
+    width: 100%;
+
+    height: 96vh;
+
+    border-radius: 20px;
+
+  }
+
+
+  /* SIDEBAR */
+
+  .sidebar {
+
+    width: 75px;
+
+    min-width: 75px;
+
+    padding:
+      25px 8px;
+
+  }
+
+
+  .sidebar h1 {
+
+    font-size: 22px;
+
+    margin-bottom: 25px;
+
+  }
+
+
+  .sidebar h1 span {
+
+    display: none;
+
+  }
+
+
+  .nav-btn {
+
+    padding:
+      12px 5px;
+
+    text-align: center;
+
+  }
+
+
+  .nav-btn label {
+
+    display: none;
+
+  }
+
+
+  .nav-btn span {
+
+    display: block;
+
+    width: auto;
+
+    font-size: 24px;
+
+  }
+
+
+  .sidebar-bottom {
+
+    display: none;
+
+  }
+
+
+
+  /* CONTENT */
+
+  .content {
+
+    min-width: 0;
+
+    overflow: hidden;
+
+  }
+
+
+  .page {
+
+    padding:
+      35px 20px 100px;
+
+    overflow-y: auto;
+
+  }
+
+
+
+  /* TITLE */
+
+  .page h2 {
+
+    margin-top: 15px;
+
+    font-size: 42px;
+
+    line-height: 1.1;
+
+  }
+
+
+
+  /* MUSIC */
+
+  .music-button {
+
+    display: none;
+
+  }
+
+
+
+  /* LETTER */
+
+  .letter-text {
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+  }
+
+
+  .flower {
+
+    position: relative;
+
+    right: auto;
+
+    bottom: auto;
+
+    text-align: center;
+
+    margin: 15px 0;
+
+    font-size: 90px;
+
+  }
+
+
+
+  /* SURPRISE */
+
+  .surprise-btn {
+
+    position: relative;
+
+    left: 50%;
+
+    bottom: auto;
+
+    margin-top: 15px;
+
+  }
+
+
+
+  /* SONGS */
+
+  .songs-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    width: 100%;
+
+  }
+
+
+  .song-card {
+
+    width: 100%;
+
+    padding: 15px;
+
+    gap: 12px;
+
+  }
+
+
+  .album-heart {
+
+    width: 52px;
+
+    height: 52px;
+
+    font-size: 28px;
+
+  }
+
+
+  .song-info h3 {
+
+    font-size: 14px;
+
+  }
+
+
+  .song-info p {
+
+    font-size: 11px;
+
+  }
+
+
+  .play-btn {
+
+    padding:
+      8px 13px;
+
+    font-size: 12px;
+
+  }
+
+
+
+  /* REASONS */
+
+  .reasons {
+
+    grid-template-columns: 1fr;
+
+    width: 100%;
+
+  }
+
+
+  .reason {
+
+    width: 100%;
+
+  }
+
+
+
+  /* SURPRISE */
+
+  .surprise-box {
+
+    padding: 30px 20px;
+
+  }
+
+
+  /* INTRO */
+
+  .intro-greeting {
+
+    font-size: 40px;
+
+  }
+
+
+  .envelope-3d {
+
+    width: 180px;
+
+    height: 125px;
+
+  }
+
+
+  .env-letter {
+
+    height: 96px;
+
+    font-size: 16px;
+
+  }
+
+
+}
